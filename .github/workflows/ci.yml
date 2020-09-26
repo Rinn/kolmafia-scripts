@@ -40,13 +40,11 @@ jobs:
 
           ../.github/verify.sh
           if [ $? -ne 0 ]; then
-            ((errors+=1))
+            errors=$((errors+1))
           fi
-          ((all+=1))
+          all=$((all+1))
 
           cd ..
-          echo "\n"
-
         done
 
         echo "Verified ${all} script(s), ${errors) error(s)"
