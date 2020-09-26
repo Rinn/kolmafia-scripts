@@ -4,6 +4,8 @@ Various scripts for KoLMafia.
 ## AcquireBuff
 Automatically get a buff from a Kingdom of Loathing buffbot.
 
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/AcquireBuff/`
+
 ### zlib Settings
 * `FamiliarDrops_Enabled`: If this script is enabled. Ignored if you import the script and call familiar_swap().
 * `FamiliarDrops_MinMpa`: The minimum mpa required to swap to a familiar.
@@ -17,8 +19,12 @@ Automatically get a buff from a Kingdom of Loathing buffbot.
 ## CreationCost
 Estimate optimized creation cost for an item, similiar to internal KoLMafia acquire logic.
 
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/CreationCost/`
+
 ## FamiliarDrops
 Automatically get profitable drops from familiars. A script for KoLMafia.
+
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/FamiliarDrops/`
 
 ### zlib Settings
 * `acquireBuff_last_update`: Last time buffbot data was parsed. Internal use only do not modify.
