@@ -35,7 +35,7 @@ Automatically get profitable drops from familiars.
 [Thread](https://kolmafia.us/showthread.php?18051-FamiliarDrops-Get-profitable-drops-from-familiars])
 
 ## PvPHistory
-Log PvP records to a data file.
+Log PvP records to a data file. KoL only stores the most recent 1000 records, so you will get partial data if run in the middle of a season.
 
 `svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/PvPHistory/`
 
