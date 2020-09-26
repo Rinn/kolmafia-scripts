@@ -1,0 +1,2 @@
+https://svn.code.sf.net/p/zlib/code
+https://github.com/Rinn/kolmafia-scripts/trunk/CreationCost/

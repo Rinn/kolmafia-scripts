@@ -22,7 +22,7 @@ Estimate optimized creation cost for an item, similiar to internal KoLMafia acqu
 `svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/CreationCost/`
 
 ## FamiliarDrops
-Automatically get profitable drops from familiars. A script for KoLMafia.
+Automatically get profitable drops from familiars.
 
 `svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/FamiliarDrops/`
 
@@ -33,3 +33,8 @@ Automatically get profitable drops from familiars. A script for KoLMafia.
 * `acquireBuff_ignore_philanthropic`: Whether to requires philanthropic (extremely low cost) buffs. Default false.
 
 [Thread](https://kolmafia.us/showthread.php?18051-FamiliarDrops-Get-profitable-drops-from-familiars])
+
+## PvPHistory
+Log PvP records to a data file.
+
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/PvPHistory/`
