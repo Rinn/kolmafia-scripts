@@ -47,6 +47,6 @@ jobs:
           cd ..
         done
 
-        echo "Verified ${all} script(s), ${errors) error(s)"
+        echo "Verified ${all} script(s), ${errors} error(s)"
 
         exit ${errors}
