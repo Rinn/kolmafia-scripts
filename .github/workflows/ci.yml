@@ -28,18 +28,26 @@ jobs:
     
     - name: Install and verify
       run: |
+        echo Verifying scripts...
         errors=0
+        all=0
         for subdir in $(ls -d */); do
           cd "${subdir}"
-          echo "=============== ${subdir} ==============="
+          echo "============================================="
+          echo "== Verifying ${subdir}"
+          echo "============================================="
 
+          ../.github/verify.sh
           if [ $? -ne 0 ]; then
             ((errors+=1))
           fi
+          ((all+=1))
 
           cd ..
-          echo "===================="
+          echo ""
 
         done
+
+        echo "Verified ${all} script(s), ${errors) error(s)"
 
         exit ${errors}
