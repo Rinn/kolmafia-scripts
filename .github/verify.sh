@@ -1,8 +1,14 @@
 #!/bin/bash
 
-cd scripts/
-ashfiles=$(ls *.ash)
-cd ..
+if [ -d "scripts/" ]; then
+    cd scripts/
+    ashfiles=$(ls *.ash)
+    cd ..
+elif [ -d "relay/" ]; then
+    cd relay/
+    ashfiles=$(ls *.ash)
+    cd ..
+fi
 
 if [[ -f "dependencies.txt" ]]; then
     # Install dependencies
