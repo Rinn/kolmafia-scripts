@@ -5,6 +5,8 @@ if [ -d "scripts/" ]; then
     cd scripts/
     scriptsfiles=$(ls *.ash)
     cd ..
+else
+    mkdir "scripts/"
 fi
 
 relayfiles=
@@ -19,10 +21,11 @@ if [[ -f "dependencies.txt" ]]; then
     echo "Installing dependencies..."
 
     output_file="scripts/_ci_dependencies.ash"
+    echo "try {" > "$output_file"
     while read -r line || [ -n "$line" ]; do
         echo "cli_execute('svn checkout ${line}');" >> "$output_file"
     done < "dependencies.txt"
-    echo "cli_execute('exit');" >> "$output_file"
+    echo "} finally { cli_execute('exit'); }" >> "$output_file"
     java -DuseCWDasROOT=true -jar ../.github/kolmafia.jar --CLI _ci_dependencies
 fi
 

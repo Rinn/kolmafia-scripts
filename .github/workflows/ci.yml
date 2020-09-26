@@ -45,7 +45,7 @@ jobs:
           ((all+=1))
 
           cd ..
-          echo ""
+          echo "\n"
 
         done
 
