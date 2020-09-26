@@ -1,12 +1,15 @@
 #!/bin/bash
 
+ashfiles=
 if [ -d "scripts/" ]; then
     cd scripts/
-    ashfiles=$(ls *.ash)
+    ashfiles=${ashfiles} $(ls *.ash)
     cd ..
-elif [ -d "relay/" ]; then
+fi
+
+if [ -d "relay/" ]; then
     cd relay/
-    ashfiles=$(ls *.ash)
+    ashfiles=${ashfiles} $(ls *.ash)
     cd ..
 fi
 
@@ -22,6 +25,7 @@ if [[ -f "dependencies.txt" ]]; then
     java -DuseCWDasROOT=true -jar ../.github/kolmafia.jar --CLI _ci_dependencies
 fi
 
+errors=0
 for ashfile in ${ashfiles}; do
     # Run the verification
     echo "Verifying ${ashfile}..."
@@ -30,9 +34,10 @@ for ashfile in ${ashfiles}; do
     output=$(java -DuseCWDasROOT=true -jar ../.github/kolmafia.jar --CLI _ci_verify)
     if [[ $output == *"Script verification complete." ]]; then
         echo "Verified ${ashfile}!"
-        exit 0
     else
         echo $output
-        exit 1
+        ((errors+=1))
     fi
 done
+
+exit ${errors}
