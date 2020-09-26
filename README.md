@@ -42,4 +42,6 @@ Log PvP records to a data file.
 ## RelaySnapshot
 Shows your CheeseCookie snapshot in the relay browser. See [this thread](http://forums.kingdomofloathing.com/vb/showthread.php?t=218735) for more details.
 
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/RelaySnapshot/`
+
 [My Snapshot](https://cheesellc.com/kol/profile.php?u=epicgamer)
