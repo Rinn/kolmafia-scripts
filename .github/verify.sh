@@ -26,7 +26,10 @@ if [[ -f "dependencies.txt" ]]; then
         echo "cli_execute('svn checkout ${line}');" >> "$output_file"
     done < "dependencies.txt"
     echo "} finally { cli_execute('exit'); }" >> "$output_file"
-    java -DuseCWDasROOT=true -jar ../.github/kolmafia.jar --CLI _ci_dependencies
+    output=$(java -DuseCWDasROOT=true -jar ../.github/kolmafia.jar --CLI _ci_dependencies)
+    if [ $? -ne 0 ]; then
+        echo $output
+    fi
 fi
 
 errors=0
