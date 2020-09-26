@@ -40,7 +40,7 @@ for ashfile in ${scriptsfiles}; do
         echo "Verified ${ashfile}!"
     else
         echo $output
-        ((errors+=1))
+        errors=$((errors+1))
     fi
 done
 

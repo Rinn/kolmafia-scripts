@@ -29,7 +29,9 @@ jobs:
     - name: Install and verify
       run: |
         echo Verifying scripts...
+
         chmod +x ./.github/verify.sh
+
         errors=0
         all=0
         for subdir in $(ls -d */); do
@@ -39,6 +41,7 @@ jobs:
           echo "============================================="
 
           ../.github/verify.sh
+
           if [ $? -ne 0 ]; then
             errors=$((errors+1))
           fi
@@ -47,6 +50,5 @@ jobs:
           cd ..
         done
 
-        echo "Verified ${all} script(s), ${errors} error(s)"
-
+        echo "Verified ${all} scripts, ${errors} errors"
         exit ${errors}
