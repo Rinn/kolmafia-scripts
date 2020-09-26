@@ -31,15 +31,14 @@ jobs:
         errors=0
         for subdir in $(ls -d */); do
           cd "${subdir}"
-          echo "===== ${subdir} ====="
+          echo "=============== ${subdir} ==============="
 
-          if [ $? -neq 0 ]; then
+          if [ $? -ne 0 ]; then
             ((errors+=1))
           fi
 
           cd ..
-          echo "=========="
-          echo.
+          echo "===================="
 
         done
 
