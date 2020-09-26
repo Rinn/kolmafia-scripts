@@ -29,6 +29,7 @@ jobs:
     - name: Install and verify
       run: |
         echo Verifying scripts...
+        chmod +x ../.github/verify.sh
         errors=0
         all=0
         for subdir in $(ls -d */); do
