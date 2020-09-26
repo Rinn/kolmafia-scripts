@@ -1,0 +1,54 @@
+# This is a workflow to perform basic verification for KoLmafia ASH scripts
+
+name: CI
+env:
+  MAFIA_BUILD: "1900"
+  MAFIA_VERSION: "20932"
+
+on: [push, pull_request]
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.8
+
+    - name: Prepare KoLmafia
+      run: |
+        if [[ ! -f ".github/kolmafia.jar" ]]; then
+          curl "https://ci.kolmafia.us/job/Kolmafia/${MAFIA_BUILD}/artifact/dist/KoLmafia-${MAFIA_VERSION}.jar" --output .github/kolmafia.jar
+        fi
+    
+    - name: Install and verify
+      run: |
+        echo Verifying scripts...
+
+        chmod +x ./.github/verify.sh
+
+        errors=0
+        all=0
+        for subdir in $(ls -d */); do
+          cd "${subdir}"
+          echo "============================================="
+          echo "== Verifying ${subdir}"
+          echo "============================================="
+
+          ../.github/verify.sh
+
+          if [ $? -ne 0 ]; then
+            errors=$((errors+1))
+          fi
+          all=$((all+1))
+
+          cd ..
+        done
+
+        echo "Verified ${all} scripts, ${errors} errors"
+        exit ${errors}
