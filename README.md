@@ -38,3 +38,8 @@ Automatically get profitable drops from familiars.
 Log PvP records to a data file.
 
 `svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/PvPHistory/`
+
+## RelaySnapshot
+Shows your CheeseCookie snapshot in the relay browser. See [this thread](http://forums.kingdomofloathing.com/vb/showthread.php?t=218735) for more details.
+
+[My Snapshot](https://cheesellc.com/kol/profile.php?u=epicgamer)
