@@ -9,6 +9,11 @@ boolean [effect, int, int, string] buffs;
 
 boolean[string] online;
 
+string data_filename()
+{
+	return "acquireBuff_data_" + my_name() + ".txt";
+}
+
 int[effect] all_songs()
 {
 	int[effect] songs;
@@ -55,7 +60,7 @@ void gather_data()
 
 	if (vars["acquireBuff_last_update"] == today_to_string())
 	{
-		file_to_map("acquireBuff_data.txt", buffs);
+		file_to_map(data_filename(), buffs);
 		return;
 	}
 	
@@ -111,7 +116,7 @@ void gather_data()
 	}
 	vprint("Buffbot data refreshed.", 2);
 	
-	map_to_file(buffs, "acquireBuff_data.txt");
+	map_to_file(buffs, data_filename());
 	vars["acquireBuff_last_update"] = today_to_string();
 	updatevars();
 
@@ -149,7 +154,7 @@ boolean try_acquire_buff(effect ef)
 			if (e == ef && buffs[e, p, t, n] == false && p <= vars["acquireBuff_max_price"].to_int() && online[n])
 			{
 				buffs[e, p, t, n] = true;
-				map_to_file(buffs, "acquireBuff_data.txt");
+				map_to_file(buffs, data_filename());
 				online[n] = false;
 				vprint("Sending kmail to " + n + " for " + p + "meat", "blue", 2);
 				kmail(n, "", p);
