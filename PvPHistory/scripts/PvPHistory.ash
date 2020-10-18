@@ -177,7 +177,7 @@ void update_old_seasons()
 
 int current_season()
 {
-    string regex = "<b>Current Season: </b>(\\d+)<br />";
+    string regex = "<b>Current Season: </b>(\\d+)";
     string page;
     page = visit_url("peevpee.php");
     page = visit_url("peevpee.php?place=rules", false);
@@ -193,6 +193,10 @@ int current_season()
 void update_history()
 {
     int season = current_season();
+    if (season == 0)
+    {
+        return;
+    }
     string filename = "PvPHistory_" + my_name() + "_Season_" + season + ".txt";
     pvplog[int] history;
     vprint("Loading " + filename, 6);
