@@ -225,6 +225,12 @@ familiar familiar_swap()
 			}
 		}
 
+		// Don't allow Green Pixie if we already have absinthe-minded - bottles will not drop
+		if (familiarItems[f].pref == "_absintheDrops" && $effect[Absinthe-Minded].have_effect() > 0)
+		{
+			continue;
+		}
+		
 		int i = 0;
 		if (familiarItems[f].pref != "")
 		{
