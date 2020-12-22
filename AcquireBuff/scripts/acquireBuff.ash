@@ -52,7 +52,7 @@ void gather_data()
 		string xml;
 	};
 	buffbot [string] buffbots;
-	file_to_map("buffbots.txt", buffbots);
+	file_to_map("data/buffbots.txt", buffbots);
 	foreach i in buffbots
 	{
 		online[i] = is_online(i);

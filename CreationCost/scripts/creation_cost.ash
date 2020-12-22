@@ -19,7 +19,7 @@ record _recipe {
 };
 
 _recipe_str [item] concoctions_str;
-file_to_map("concoctions.txt", concoctions_str);
+file_to_map("data/concoctions.txt", concoctions_str);
 _recipe [item] concoctions;
 
 string multi_item_regex = "(.*?) \\((\\d+)\\)";
