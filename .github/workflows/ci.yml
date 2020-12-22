@@ -2,8 +2,8 @@
 
 name: CI
 env:
-  MAFIA_BUILD: "1900"
-  MAFIA_VERSION: "20932"
+  MAFIA_BUILD: "96"
+  MAFIA_VERSION: "20582"
 
 on: [push, pull_request]
 
