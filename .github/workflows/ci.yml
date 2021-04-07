@@ -20,11 +20,32 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Prepare KoLmafia
+    - name: Determine KoLmafia version
+      id: mafia
       run: |
-        if [[ ! -f ".github/kolmafia.jar" ]]; then
-          curl "https://ci.kolmafia.us/job/Kolmafia/${MAFIA_BUILD}/artifact/dist/KoLmafia-${MAFIA_VERSION}.jar" --output .github/kolmafia.jar
+        set -o pipefail
+        export MAFIA_BUILD=$(curl --fail --silent --globoff 'https://ci.kolmafia.us/job/Kolmafia/api/json?tree=lastCompletedBuild[changeSet[items[revision]]]' | jq '.lastCompletedBuild.changeSet.items[0].revision')
+        if [[ -z "$MAFIA_BUILD" ]]; then
+          echo "Could not determine mafia version of Jenkins last completed build!"
+          exit 1
         fi
+        export JENKINS_URL="https://ci.kolmafia.us/job/Kolmafia/lastCompletedBuild/artifact/dist/KoLmafia-${MAFIA_BUILD}.jar"
+        echo "::set-output name=jenkins::$JENKINS_URL"
+        echo "Jenkins URL = ${JENKINS_URL}"
+        echo "::set-output name=build::$MAFIA_BUILD"
+        echo "Jenkins Mafia Build = ${MAFIA_BUILD}"
+
+    - name: Cache KoLmafia
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: .github/kolmafia.jar
+        key: kolmafia-${{steps.mafia.outputs.build}}
+
+    - name: Download KoLmafia
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        curl "${{steps.mafia.outputs.jenkins}}" --output .github/kolmafia.jar
     
     - name: Install and verify
       run: |
