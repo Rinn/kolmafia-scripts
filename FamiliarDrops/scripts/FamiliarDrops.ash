@@ -194,7 +194,7 @@ familiar familiar_swap()
 {
 	boolean[familiar] banned;
 
-	foreach i,s in vars["FamiliarDrops_Banned"].split_string(",")
+	foreach i,s in getvar("FamiliarDrops_Banned").split_string(",")
 	{
 		banned[s.to_familiar()] = true;
 	}
@@ -259,7 +259,7 @@ familiar familiar_swap()
 
 			_mpa fmpa;
 			fmpa.fam = f;
-			if (!vars["FamiliarDrops_AssumeWorst"].to_boolean())
+			if (!getvar("FamiliarDrops_AssumeWorst").to_boolean())
 			{
 				fmpa.mpa = price / (median * 1.0);
 			}
@@ -270,11 +270,11 @@ familiar familiar_swap()
 
 			vprint(f + " drop " + (f.drops_today+1) + " " + price + ": median(" + median + ") worst(" + worst + ")", 7);
 
-			if (vars["FamiliarDrops_AssumeWorst"].to_boolean() && my_adventures() < worst)
+			if (getvar("FamiliarDrops_AssumeWorst").to_boolean() && my_adventures() < worst)
 			{
 				continue;
 			}
-			if (!vars["FamiliarDrops_AssumeWorst"].to_boolean() && my_adventures() < median)
+			if (!getvar("FamiliarDrops_AssumeWorst").to_boolean() && my_adventures() < median)
 			{
 				continue;
 			}
@@ -294,7 +294,7 @@ familiar familiar_swap()
 				median = ((familiarItems[f].absoluteDropMin[i] + familiarItems[f].absoluteDropMax[i]) / 2.0);
 			}
 
-			if (familiarItems[f].absoluteDropMin[i] > 0 || !vars["FamiliarDrops_AssumeWorst"].to_boolean())
+			if (familiarItems[f].absoluteDropMin[i] > 0 || !getvar("FamiliarDrops_AssumeWorst").to_boolean())
 			{
 				fmpa.mpa = price / median;
 			}
@@ -303,11 +303,11 @@ familiar familiar_swap()
 				fmpa.mpa = price / worst;
 			}
 
-			if (vars["FamiliarDrops_AssumeWorst"].to_boolean() && my_adventures() < worst)
+			if (getvar("FamiliarDrops_AssumeWorst").to_boolean() && my_adventures() < worst)
 			{
 				continue;
 			}
-			if (!vars["FamiliarDrops_AssumeWorst"].to_boolean() && my_adventures() < median)
+			if (!getvar("FamiliarDrops_AssumeWorst").to_boolean() && my_adventures() < median)
 			{
 				continue;
 			}
@@ -325,13 +325,13 @@ familiar familiar_swap()
 	}
 
 	float minmpa = 0.0;
-	if (vars["FamiliarDrops_MinMpaItem"].to_item() != $item[none])
+	if (getvar("FamiliarDrops_MinMpaItem").to_item() != $item[none])
 	{
-		minmpa = item_price(vars["FamiliarDrops_MinMpaItem"].to_item());
+		minmpa = item_price(getvar("FamiliarDrops_MinMpaItem").to_item());
 	}
 	else
 	{
-		minmpa = vars["FamiliarDrops_MinMpa"].to_float();
+		minmpa = getvar("FamiliarDrops_MinMpa").to_float();
 	}
 
 	if (count(mpa) > 0 && mpa[0].mpa >= minmpa)
@@ -339,7 +339,7 @@ familiar familiar_swap()
 		return mpa[0].fam;
 	}
 
-	return vars["FamiliarDrops_DefaultFam"].to_familiar();
+	return getvar("FamiliarDrops_DefaultFam").to_familiar();
 }
 
 // TODO: Snow suit?
@@ -358,7 +358,7 @@ item familiar_swap_equipment(familiar fam)
 
 void main()
 {
-	if (!vars["FamiliarDrops_Enabled"].to_boolean())
+	if (!getvar("FamiliarDrops_Enabled").to_boolean())
 	{
 		return;
 	}
