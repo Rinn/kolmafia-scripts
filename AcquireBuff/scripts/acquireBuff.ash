@@ -58,7 +58,7 @@ void gather_data()
 		online[i] = is_online(i);
 	}
 
-	if (vars["acquireBuff_last_update"] == today_to_string())
+	if (getvar("acquireBuff_last_update") == today_to_string())
 	{
 		file_to_map(data_filename(), buffs);
 		return;
@@ -100,7 +100,7 @@ void gather_data()
 
 				// Ignore philanthropic buffs
 				boolean philanthropic = excise(buffdata, "<philanthropic>", "</philanthropic>").to_boolean();
-				if (vars["acquireBuff_ignore_philanthropic"].to_boolean() == true && philanthropic == true)
+				if (getvar("acquireBuff_ignore_philanthropic").to_boolean() == true && philanthropic == true)
 				{
 					buffs[name, price, turns, i] = true;
 				}
@@ -120,7 +120,7 @@ void gather_data()
 	vars["acquireBuff_last_update"] = today_to_string();
 	updatevars();
 
-	if (vars["verbosity"].to_int() >= 8)
+	if (getvar("verbosity").to_int() >= 8)
 	{
 		foreach e, p, t, n in buffs
 		{
@@ -151,7 +151,7 @@ boolean try_acquire_buff(effect ef)
 	{
 		foreach e, p, t, n in buffs
 		{
-			if (e == ef && buffs[e, p, t, n] == false && p <= vars["acquireBuff_max_price"].to_int() && online[n])
+			if (e == ef && buffs[e, p, t, n] == false && p <= getvar("acquireBuff_max_price").to_int() && online[n])
 			{
 				buffs[e, p, t, n] = true;
 				map_to_file(buffs, data_filename());
@@ -183,7 +183,7 @@ boolean acquireBuff(effect e)
 			return false;
 		}
 		
-		wait(vars["acquireBuff_wait_time"].to_int());
+		wait(getvar("acquireBuff_wait_time").to_int());
 		cli_execute("refresh effects");
 	}
 	
