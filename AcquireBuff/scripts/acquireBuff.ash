@@ -117,7 +117,7 @@ void gather_data()
 	vprint("Buffbot data refreshed.", 2);
 	
 	map_to_file(buffs, data_filename());
-	getvar("acquireBuff_last_update") = today_to_string();
+	vars["acquireBuff_last_update"] = today_to_string();
 	updatevars();
 
 	if (getvar("verbosity").to_int() >= 8)
