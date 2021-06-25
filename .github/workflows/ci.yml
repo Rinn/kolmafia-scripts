@@ -8,6 +8,10 @@ jobs:
   verify:
     name: Verify
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        script: [ 'AcquireBuff', 'CreationCost', 'FamiliarDrops', 'PvPHistory', 'RelaySnapshot' ]
 
     steps:
     - uses: actions/checkout@v2
@@ -45,29 +49,22 @@ jobs:
       run: |
         curl "${{steps.mafia.outputs.jenkins}}" --output .github/kolmafia.jar
 
-    - name: Install and verify
+    - name: Install and verify ${{ matrix.Script }}
+      env:
+        SCRIPT: ${{ matrix.Script }}
       run: |
-        echo Verifying scripts...
+        echo "============================================="
+        echo "== Verifying $SCRIPT"
+        echo "============================================="
+        cd "$SCRIPT"
 
-        chmod +x ./.github/verify.sh
+        chmod +x ../.github/verify.sh
+        ../.github/verify.sh
 
-        errors=0
-        all=0
-        for subdir in $(ls -d */); do
-          cd "${subdir}"
-          echo "============================================="
-          echo "== Verifying ${subdir}"
-          echo "============================================="
+        if [ $? -ne 0 ]; then
+          echo "Error verifying $SCRIPT"
+          exit 1
+        fi
 
-          ../.github/verify.sh
-
-          if [ $? -ne 0 ]; then
-            errors=$((errors+1))
-          fi
-          all=$((all+1))
-
-          cd ..
-        done
-
-        echo "Verified ${all} scripts, ${errors} errors"
-        exit ${errors}
+        echo "Verified $SCRIPT"
+        exit 0
