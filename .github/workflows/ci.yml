@@ -50,11 +50,9 @@ jobs:
         curl "${{steps.mafia.outputs.jenkins}}" --output .github/kolmafia.jar
 
     - name: Install and verify ${{ matrix.Script }}
-      env:
-        SCRIPT: ${{ matrix.Script }}
       run: |
         echo "============================================="
-        echo "== Verifying $SCRIPT"
+        echo "== Verifying ${{ matrix.Script }}"
         echo "============================================="
         cd "$SCRIPT"
 
@@ -62,9 +60,11 @@ jobs:
         ../.github/verify.sh
 
         if [ $? -ne 0 ]; then
+          echo.
           echo "Error verifying ${{ matrix.Script }}"
           exit 1
         fi
 
-        echo "Verified $SCRIPT"
+        echo.
+        echo "Verified ${{ matrix.Script }}"
         exit 0
