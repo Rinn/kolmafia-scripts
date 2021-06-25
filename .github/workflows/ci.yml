@@ -50,11 +50,13 @@ jobs:
         curl "${{steps.mafia.outputs.jenkins}}" --output .github/kolmafia.jar
 
     - name: Install and verify ${{ matrix.Script }}
+      env:
+        SCRIPT: ${{ matrix.Script }}
       run: |
         echo "============================================="
-        echo "== Verifying ${{ matrix.Script }}"
+        echo "== Verifying $SCRIPT"
         echo "============================================="
-        cd "${{ matrix.Script }}"
+        cd "$SCRIPT"
 
         chmod +x ./.github/verify.sh
         ../.github/verify.sh
@@ -64,5 +66,5 @@ jobs:
           exit 1
         fi
 
-        echo "Verified ${{ matrix.Script }}"
+        echo "Verified $SCRIPT"
         exit 0
