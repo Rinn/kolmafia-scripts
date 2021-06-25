@@ -58,7 +58,7 @@ jobs:
         echo "============================================="
         cd "$SCRIPT"
 
-        chmod +x ./.github/verify.sh
+        chmod +x ../.github/verify.sh
         ../.github/verify.sh
 
         if [ $? -ne 0 ]; then
