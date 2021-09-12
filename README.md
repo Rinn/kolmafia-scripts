@@ -39,6 +39,13 @@ Log PvP records to a data file. KoL only stores the most recent 1000 records, so
 
 `svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/PvPHistory/`
 
+## RelaySkills
+A relay override that modifies the game character page and groups all of a characters skills.
+
+`svn checkout https://github.com/Rinn/kolmafia-scripts/trunk/RelaySkills/`
+
+[Thread](https://kolmafia.us/threads/charsheet-php-group-skills-by-character-class.1578/)
+
 ## RelaySnapshot
 Shows your CheeseCookie snapshot in the relay browser. See [this thread](http://forums.kingdomofloathing.com/vb/showthread.php?t=218735) for more details.
 
