@@ -11,7 +11,7 @@ jobs:
     
     strategy:
       matrix:
-        script: [ 'AcquireBuff', 'CreationCost', 'FamiliarDrops', 'PvPHistory', 'RelaySnapshot' ]
+        script: [ 'AcquireBuff', 'CreationCost', 'FamiliarDrops', 'PvPHistory', 'RelaySkills', 'RelaySnapshot' ]
 
     steps:
     - uses: actions/checkout@v2
