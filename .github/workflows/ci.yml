@@ -48,7 +48,7 @@ jobs:
     - name: Download KoLmafia
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        curl "${{steps.mafia.outputs.github}}" --output .github/kolmafia.jar
+        curl -L "${{steps.mafia.outputs.github}}" --output .github/kolmafia.jar
 
     - name: Install and verify ${{ matrix.Script }}
       env:
