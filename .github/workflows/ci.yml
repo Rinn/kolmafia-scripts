@@ -31,8 +31,8 @@ jobs:
           echo "Could not get KoLmafia latst release from GitHub!"
           exit 1
         fi
-        export GITHUB_BUILD=echo $GITHUB_RELEASE | jq '.assets[0].name')
-        export GITHUB_URL=export BUILD=echo $GITHUB_RELEASE | jq '.assets[0].browser_download_url')
+        export GITHUB_BUILD=$(echo $GITHUB_RELEASE | jq '.assets[0].name')
+        export GITHUB_URL=$(echo $GITHUB_RELEASE | jq '.assets[0].browser_download_url')
         echo "::set-output name=github::$GITHUB_URL"
         echo "GitHub URL = ${GITHUB_URL}"
         echo "::set-output name=build::$GITHUB_BUILD"
