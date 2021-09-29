@@ -19,8 +19,8 @@ jobs:
     - name: Setup Java JDK
       uses: actions/setup-java@v2
       with:
-        distribution: 'adopt'
-        java-version: 16
+        distribution: 'temurin'
+        java-version: 17
 
     - name: Determine KoLmafia version
       id: mafia
